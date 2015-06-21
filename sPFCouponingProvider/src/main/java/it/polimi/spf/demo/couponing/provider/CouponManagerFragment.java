@@ -2,14 +2,14 @@ package it.polimi.spf.demo.couponing.provider;
 
 import java.util.List;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,26 +27,11 @@ public class CouponManagerFragment extends Fragment {
 
 	private static final int LOADER_COUPON_ID = 0;
 
-	public static Fragment newInstance() {
+	public static CouponManagerFragment newInstance() {
 		return new CouponManagerFragment();
 	}
 
-	private LoaderCallbacks<List<Coupon>> mLoaderCallbacks = new LoaderCallbacks<List<Coupon>>() {
-
-		@Override
-		public void onLoaderReset(Loader<List<Coupon>> arg0) {
-			// Do nothing
-		}
-
-		@Override
-		public void onLoadFinished(Loader<List<Coupon>> arg0, List<Coupon> coupons) {
-			mAdapter.clear();
-			if (coupons.size() == 0) {
-				mEmpty.setText(R.string.coupon_list_empty);
-			} else {
-				mAdapter.addAll(coupons);
-			}
-		}
+	private LoaderManager.LoaderCallbacks<List<Coupon>> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<List<Coupon>>() {
 
 		@Override
 		public Loader<List<Coupon>> onCreateLoader(int id, Bundle args) {
@@ -57,6 +42,21 @@ public class CouponManagerFragment extends Fragment {
 					return ProviderApplication.get().getCouponDatabase().getAllCoupons();
 				}
 			};
+		}
+
+		@Override
+		public void onLoadFinished(android.support.v4.content.Loader<List<Coupon>> loader, List<Coupon> coupons) {
+			mAdapter.clear();
+			if (coupons.size() == 0) {
+				mEmpty.setText(R.string.coupon_list_empty);
+			} else {
+				mAdapter.addAll(coupons);
+			}
+		}
+
+		@Override
+		public void onLoaderReset(android.support.v4.content.Loader<List<Coupon>> loader) {
+			// Do nothing
 		}
 	};
 
@@ -111,6 +111,8 @@ public class CouponManagerFragment extends Fragment {
 		if (item.getItemId() == R.id.action_coupon_add) {
 			Intent i = CouponCreationActivity.newIntent(getActivity());
 			startActivity(i);
+
+			//TODO START HERE THE CREATIONFRAGMENT
 			return true;
 		}
 
@@ -144,12 +146,10 @@ public class CouponManagerFragment extends Fragment {
 				return (ViewHolder) o;
 			}
 
-			//@formatter:off
 			ViewHolder holder = new ViewHolder(
 					(ImageView) view.findViewById(R.id.coupon_entry_photo),
 					(TextView) view.findViewById(R.id.coupon_entry_title),
 					(TextView) view.findViewById(R.id.coupon_entry_category));
-			//@formatter:on
 
 			view.setTag(holder);
 			return holder;

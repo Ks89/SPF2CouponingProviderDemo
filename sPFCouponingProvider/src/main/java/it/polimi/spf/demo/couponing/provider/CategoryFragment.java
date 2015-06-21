@@ -8,8 +8,8 @@ import it.polimi.spf.lib.profile.SPFLocalProfile;
 import it.polimi.spf.shared.model.ProfileField;
 import it.polimi.spf.shared.model.ProfileFieldContainer;
 import it.polimi.spf.shared.model.SPFError;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -23,9 +23,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class CategoryFragment extends Fragment{
+public class CategoryFragment extends Fragment {
 
-	public static Fragment newInstance() {
+	public static CategoryFragment newInstance() {
 		return new CategoryFragment();
 	}
 	
@@ -33,7 +33,6 @@ public class CategoryFragment extends Fragment{
     private SPFLocalProfile mLocalProfile;
     private ProfileFieldContainer mContainer;
 
-    private TextView mEmptyView;
     private ListView mList;
 
     private final SPFLocalProfile.Callback mProfileCallbacks = new SPFLocalProfile.Callback() {
@@ -84,8 +83,8 @@ public class CategoryFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.fragment_category_list, container, false);
-		
-		mEmptyView = (TextView) root.findViewById(R.id.category_list_empty);
+
+        TextView mEmptyView = (TextView) root.findViewById(R.id.category_list_empty);
 		mList = (ListView) root.findViewById(R.id.category_list);
         mList.setEmptyView(mEmptyView);
 		
@@ -114,14 +113,18 @@ public class CategoryFragment extends Fragment{
 
     private void onDataReady() {
     	String[] categories = ProviderApplication.get().getCouponDatabase().getCategories();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
         		getActivity(),
         		android.R.layout.simple_list_item_multiple_choice,
         		categories);
         mList.setAdapter(adapter);
 
+        //FIXME anche qui nullpointerexception, penso su mContainer
         String[] interests = mContainer.getFieldValue(ProfileField.INTERESTS);
-        if(interests==null){ interests=new String[0];}
+        if(interests == null){
+            interests = new String[0];
+        }
+
         for (String interest : interests) {
             int i = adapter.getPosition(interest);
             if (i > -1) {
@@ -132,6 +135,7 @@ public class CategoryFragment extends Fragment{
         mList.setOnItemClickListener(mCategoryListener);
     }
 
+    //FIXME ma cosa vuol dire questa cosa????
     public void onSave() {
         if (!mContainer.isModified()) {
             return;

@@ -30,45 +30,49 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 		public boolean handleMessage(Message msg) {
 			HandlerData data = (HandlerData) msg.obj;
 
-			switch (msg.what) {
-			case MESSAGE_SEARCH:
-				SPFSearch search = data.spf.getComponent(SPF.SEARCH);
-				String identifier = getTargetIdentifier(data.extras);
-				SPFPerson target = search.lookup(identifier);
-				if (target == null) {
-					Log.e(TAG, "Person " + identifier + " not found after second search");
-					return true;
-				}
+			Log.d(TAG, "handleMessage: " + msg.toString());
 
-				data.person = target;
-				mHandler.obtainMessage(MESSAGE_EXECUTE, data).sendToTarget();
-				return true;
-			case MESSAGE_EXECUTE:
-				CouponDeliveryService svc = data.person.getServiceInterface(CouponDeliveryService.class, data.spf);
-				CouponDatabase db = ProviderApplication.get().getCouponDatabase();
-				long triggerId = getTriggerId(data.extras);
-				Coupon coupon = db.getCouponByTriggerId(triggerId);
-				
-				if(coupon == null){
-					Log.e(TAG, "No coupon found for trigger id " + triggerId);
+			switch (msg.what) {
+				case MESSAGE_SEARCH:
+					SPFSearch search = data.spf.getComponent(SPF.SEARCH);
+					String identifier = getTargetIdentifier(data.extras);
+					SPFPerson target = search.lookup(identifier);
+					if (target == null) {
+						Log.e(TAG, "Person " + identifier + " not found after second search");
+						return true;
+					}
+
+					data.person = target;
+					mHandler.obtainMessage(MESSAGE_EXECUTE, data).sendToTarget();
 					return true;
+				case MESSAGE_EXECUTE:
+					CouponDeliveryService svc = data.person.getServiceInterface(CouponDeliveryService.class, data.spf);
+
+					CouponDatabase db = ProviderApplication.get().getCouponDatabase();
+					long triggerId = getTriggerId(data.extras);
+					Coupon coupon = db.getCouponByTriggerId(triggerId);
+
+					if(coupon == null){
+						Log.e(TAG, "No coupon found for trigger id " + triggerId);
+						return true;
+					}
+
+					coupon.setTriggerId(-1);
+					coupon.setId(-1);
+
+					try {
+						//Couponing Provider sends this coupon to clients.
+						svc.deliverCoupon(coupon);
+					} catch(ServiceInvocationException e){
+						Log.e(TAG, "Could not deliver coupon " + coupon + " to " + data.person.getIdentifier(), e);
+					}
+
+					Log.d(TAG, "Coupon " + coupon + " delivered to " + data.person.getIdentifier());
+					data.spf.disconnect();
+					return true;
+				default:
+					return false;
 				}
-				
-				coupon.setTriggerId(-1);
-				coupon.setId(-1);
-				
-				try{
-					svc.deliverCoupon(coupon);
-				} catch(ServiceInvocationException e){
-					Log.e(TAG, "Could not deliver coupon " + coupon + " to " +data.person.getIdentifier(), e);
-				}
-				
-				Log.d(TAG, "Coupon " + coupon + " delivered to " + data.person.getIdentifier());
-				data.spf.disconnect();
-				return true;
-			default:
-				return false;
-			}
 		}
 	};
 

@@ -7,10 +7,10 @@ import it.polimi.spf.shared.model.SPFError;
 import it.polimi.spf.shared.model.SPFQuery;
 import it.polimi.spf.shared.model.SPFTrigger;
 import it.polimi.spf.shared.model.SPFTrigger.IllegalTriggerException;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +23,7 @@ import android.widget.EditText;
 
 public class WelcomeMessageFragment extends Fragment{
 
-	public static Fragment newInstance() {
+	public static WelcomeMessageFragment newInstance() {
 		return new WelcomeMessageFragment();
 	}
 	

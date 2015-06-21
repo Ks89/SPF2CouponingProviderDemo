@@ -30,5 +30,8 @@
     <string name="welcome_message_title">Title</string>
     <string name="welcome_message_text">Text</string>
     <string name="welcome_message_activate">Activate welcome message</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     
 </resources>

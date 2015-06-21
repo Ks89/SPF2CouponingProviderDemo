@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class CouponCreationActivity extends Activity {
+public class CouponCreationActivity extends AppCompatActivity {
 
 	private static final String TAG = "CouponCreationActivity";
 	private static final int CODE_EDIT_PHOTO = 1;
@@ -88,7 +89,7 @@ public class CouponCreationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_coupon_creation);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mPhotoInput = (ImageView) findViewById(R.id.coupon_photo);
 		mTitleInput = (EditText) findViewById(R.id.coupon_title);
@@ -96,7 +97,7 @@ public class CouponCreationActivity extends Activity {
 		mCategoryInput = (Spinner) findViewById(R.id.coupon_category);
 
 		String[] categories = ProviderApplication.get().getCouponDatabase().getCategories();
-		ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categories);
+		ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
 		mCategoryInput.setAdapter(categoryAdapter);
 
 		mPhotoInput.setOnClickListener(mPhotoClickListener);
