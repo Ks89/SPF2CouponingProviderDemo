@@ -2,10 +2,7 @@ package it.polimi.spf.demo.couponing.provider.coupons;
 
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -21,11 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import it.polimi.spf.demo.couponing.provider.Coupon;
@@ -43,10 +35,11 @@ public class CouponManagerFragment extends Fragment implements
 	private static final int LOADER_COUPON_ID = 0;
 	private RecyclerView mRecyclerView;
 
-	//	private ListView mCouponList;
 	@Getter
 	private CouponAdapter mAdapter;
 	private TextView mEmpty;
+
+	private static final int UPDATECOUPONLIST = 123;
 
 
 	public static CouponManagerFragment newInstance() {
@@ -149,17 +142,19 @@ public class CouponManagerFragment extends Fragment implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_coupon_add) {
 			Intent i = CouponCreationActivity.newIntent(getActivity());
-			startActivityForResult(i, 123);
+			startActivityForResult(i, UPDATECOUPONLIST);
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
 
+
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.d("onActivityResult","size: " + CouponList.getInstance().getCouponList().size());
-		if(requestCode==123) {
+		if(requestCode==UPDATECOUPONLIST) {
 			getLoaderManager().initLoader(LOADER_COUPON_ID, null, mLoaderCallbacks).forceLoad();
 			Log.d("onActivityResult","size: " + CouponList.getInstance().getCouponList().size());
 
