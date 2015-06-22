@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 import it.polimi.spf.demo.couponing.provider.ProviderApplication;
 import it.polimi.spf.demo.couponing.provider.R;
+import it.polimi.spf.demo.couponing.provider.detail.InputException;
 import lombok.Getter;
 
 
@@ -183,22 +184,6 @@ public class CouponCreationFragment extends Fragment {
 
         if (mCategoryInput.getSelectedItem() == null) {
             throw new InputException(R.string.error_coupon_category_empty);
-        }
-    }
-
-
-    public class InputException extends Exception {
-
-        private static final long serialVersionUID = -3918089388542981197L;
-        private int mMessageResId;
-
-        public InputException(int messageResId) {
-            super();
-            mMessageResId = messageResId;
-        }
-
-        public int getMessageResId() {
-            return mMessageResId;
         }
     }
 }

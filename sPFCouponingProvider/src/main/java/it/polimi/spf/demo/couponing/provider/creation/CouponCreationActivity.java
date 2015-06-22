@@ -3,6 +3,7 @@ package it.polimi.spf.demo.couponing.provider.creation;
 import it.polimi.spf.demo.couponing.provider.Coupon;
 import it.polimi.spf.demo.couponing.provider.ProviderApplication;
 import it.polimi.spf.demo.couponing.provider.R;
+import it.polimi.spf.demo.couponing.provider.detail.InputException;
 import it.polimi.spf.lib.notification.SPFNotification;
 import it.polimi.spf.shared.model.SPFAction;
 import it.polimi.spf.shared.model.SPFActionIntent;
@@ -147,13 +148,10 @@ public class CouponCreationActivity extends AppCompatActivity {
 
 	private void onSave() {
 		try {
-//			checkInput();
 			this.couponCreationFragment.checkInput();
-//		} catch (InputException e) {
-//			toast(e.getMessageResId());
-//			return;
-		} catch (CouponCreationFragment.InputException e) {
-			e.printStackTrace();
+		} catch (InputException e) {
+			toast(e.getMessageResId());
+			return;
 		}
 
 		Coupon coupon = new Coupon();

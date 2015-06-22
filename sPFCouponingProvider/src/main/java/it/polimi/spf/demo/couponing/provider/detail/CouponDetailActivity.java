@@ -85,17 +85,20 @@ public class CouponDetailActivity extends AppCompatActivity {
 		@Override
 		public void onServiceReady(SPFNotification componentInstance) {
 			mNotificationService = componentInstance;
+			Log.d(TAG, "SPFNotification.Callback: onServiceReady");
 		}
 		
 		@Override
 		public void onError(SPFError err) {
 			Log.e(TAG, "Error in notification service: " + err);
 			mNotificationService = null;
+			Log.e(TAG, "SPFNotification.Callback: onError " + err);
 		}
 		
 		@Override
 		public void onDisconnect() {
 			mNotificationService = null;
+			Log.d(TAG, "SPFNotification.Callback: onDisconnect");
 		}
 	};
 	
@@ -203,7 +206,7 @@ public class CouponDetailActivity extends AppCompatActivity {
 
 	/**
 	 * Method to setup the {@link android.support.v7.widget.Toolbar}
-	 * as supportActionBar in this {@link android.support.v7.app.ActionBarActivity}.
+	 * as supportActionBar in this {@link android.support.v7.app.AppCompatActivity}.
 	 */
 	private void setupToolBar() {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
