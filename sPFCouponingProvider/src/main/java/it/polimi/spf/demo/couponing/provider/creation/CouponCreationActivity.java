@@ -1,5 +1,8 @@
-package it.polimi.spf.demo.couponing.provider;
+package it.polimi.spf.demo.couponing.provider.creation;
 
+import it.polimi.spf.demo.couponing.provider.Coupon;
+import it.polimi.spf.demo.couponing.provider.ProviderApplication;
+import it.polimi.spf.demo.couponing.provider.R;
 import it.polimi.spf.lib.notification.SPFNotification;
 import it.polimi.spf.shared.model.SPFAction;
 import it.polimi.spf.shared.model.SPFActionIntent;

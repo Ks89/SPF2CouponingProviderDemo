@@ -1,4 +1,4 @@
-package it.polimi.spf.demo.couponing.provider;
+package it.polimi.spf.demo.couponing.provider.creation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +25,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import it.polimi.spf.demo.couponing.provider.ProviderApplication;
+import it.polimi.spf.demo.couponing.provider.R;
 import lombok.Getter;
 
 

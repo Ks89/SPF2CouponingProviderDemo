@@ -23,6 +23,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import it.polimi.spf.demo.couponing.provider.creation.CouponCreationActivity;
+import it.polimi.spf.demo.couponing.provider.detail.CouponDetailActivity;
+
 public class CouponManagerFragment extends Fragment {
 
 	private static final int LOADER_COUPON_ID = 0;
@@ -64,6 +67,10 @@ public class CouponManagerFragment extends Fragment {
 	private ArrayAdapter<Coupon> mAdapter;
 	private TextView mEmpty;
 
+
+	/**
+	 * Listener for click on list's items.
+	 */
 	private final OnItemClickListener mCouponClickListener = new OnItemClickListener() {
 
 		@Override

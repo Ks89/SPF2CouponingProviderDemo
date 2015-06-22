@@ -1,5 +1,8 @@
-package it.polimi.spf.demo.couponing.provider;
+package it.polimi.spf.demo.couponing.provider.detail;
 
+import it.polimi.spf.demo.couponing.provider.Coupon;
+import it.polimi.spf.demo.couponing.provider.ProviderApplication;
+import it.polimi.spf.demo.couponing.provider.R;
 import it.polimi.spf.lib.notification.SPFNotification;
 import it.polimi.spf.shared.model.SPFError;
 import lombok.Getter;
@@ -15,17 +18,15 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class CouponDetailActivity extends ActionBarActivity {
+public class CouponDetailActivity extends AppCompatActivity {
 
 	private static final String EXTRA_COUPON_ID = "couponId";
 	private static final int COUPON_LOADER_ID = 0;
@@ -101,37 +102,25 @@ public class CouponDetailActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_detail_2);
 
 		this.setupToolBar();
-
-
-		this.couponDetailFragment = CouponDetailFragment.newInstance();
-
-		this.getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container_creation_root, this.couponDetailFragment , "couponCreationFragment")
-				.commit();
-
-		this.getSupportFragmentManager().executePendingTransactions();
-
-
-
-
 
 		Bundle source = savedInstanceState != null ? savedInstanceState : getIntent().getExtras();
 		if(source == null || !source.containsKey(EXTRA_COUPON_ID)){
 			throw new IllegalStateException("Missing coupon ID");
 		}
-		
+
 		mCouponId = source.getLong(EXTRA_COUPON_ID);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
-//		mPhotoView = (ImageView) findViewById(R.id.coupon_photo);
-//		mTitleView = (TextView) findViewById(R.id.coupon_title);
-//		mTextView = (TextView) findViewById(R.id.coupon_text);
-//		mCategoryView = (TextView) findViewById(R.id.coupon_category);
-		
+
+		this.couponDetailFragment = CouponDetailFragment.newInstance();
+
+		this.getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container_detail_root, this.couponDetailFragment , "couponCreationFragment")
+				.commit();
+
+		this.getSupportFragmentManager().executePendingTransactions();
+
 		getSupportLoaderManager().initLoader(COUPON_LOADER_ID, null, mCouponLoaderCallbacks).forceLoad();
 	}
 
