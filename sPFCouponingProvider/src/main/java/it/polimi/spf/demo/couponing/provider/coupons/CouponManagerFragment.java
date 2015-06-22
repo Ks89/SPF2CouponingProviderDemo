@@ -18,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import it.polimi.spf.demo.couponing.provider.Coupon;
 import it.polimi.spf.demo.couponing.provider.ProviderApplication;
@@ -33,13 +32,11 @@ public class CouponManagerFragment extends Fragment implements
 		CouponAdapter.ItemClickListener {
 
 	private static final int LOADER_COUPON_ID = 0;
+	private static final int UPDATECOUPONLIST = 123;
 	private RecyclerView mRecyclerView;
 
 	@Getter
 	private CouponAdapter mAdapter;
-	private TextView mEmpty;
-
-	private static final int UPDATECOUPONLIST = 123;
 
 
 	public static CouponManagerFragment newInstance() {
@@ -62,13 +59,8 @@ public class CouponManagerFragment extends Fragment implements
 		@Override
 		public void onLoadFinished(Loader<List<Coupon>> loader, List<Coupon> coupons) {
 			CouponList.getInstance().getCouponList().clear();
-//			mAdapter.clear();
-//			if (coupons.size() == 0) {
-//				mEmpty.setText(R.string.coupon_list_empty);
-//			} else {
-				CouponList.getInstance().getCouponList().addAll(coupons);
-				mAdapter.notifyDataSetChanged();
-//			}
+			CouponList.getInstance().getCouponList().addAll(coupons);
+			mAdapter.notifyDataSetChanged();
 		}
 
 		@Override
@@ -76,19 +68,6 @@ public class CouponManagerFragment extends Fragment implements
 			// Do nothing
 		}
 	};
-
-//	/**
-//	 * Listener for click on list's items.
-//	 */
-//	private final OnItemClickListener mCouponClickListener = new OnItemClickListener() {
-//
-//		@Override
-//		public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
-//			Coupon c = (Coupon) parent.getItemAtPosition(position);
-//			Intent i = CouponDetailActivity.newIntent(getActivity(), c.getId());
-//			startActivity(i);
-//		}
-//	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,13 +86,6 @@ public class CouponManagerFragment extends Fragment implements
 		mRecyclerView.setAdapter(mAdapter);
 		mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-		//		mCouponList = (ListView) root.findViewById(R.id.coupon_list);
-//		mEmpty = (TextView) root.findViewById(R.id.coupon_list_empty);
-//		mCouponList.setEmptyView(mEmpty);
-//		mCouponList.setOnItemClickListener(mCouponClickListener );
-
-
 		return root;
 	}
 
@@ -121,9 +93,6 @@ public class CouponManagerFragment extends Fragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-//		mAdapter = new CouponAdapterOld(getActivity());
-//		mCouponList.setAdapter(mAdapter);
-		
 		setHasOptionsMenu(true);
 	}
 
@@ -172,7 +141,6 @@ public class CouponManagerFragment extends Fragment implements
 		int clickedPosition = mRecyclerView.getChildLayoutPosition(view);
 
 		if(clickedPosition>=0) { //a little check :)
-//			((DeviceClickListener) getActivity()).tryToConnectToAService(clickedPosition);
 			Coupon c = CouponList.getInstance().getCouponList().get(clickedPosition);
 			Intent i = CouponDetailActivity.newIntent(getActivity(), c.getId());
 			startActivity(i);

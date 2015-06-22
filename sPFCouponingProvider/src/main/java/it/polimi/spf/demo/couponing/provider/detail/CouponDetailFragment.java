@@ -54,7 +54,7 @@ public class CouponDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_coupon_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_coupon_detail, container, false);
 
         mPhotoView = (ImageView) view.findViewById(R.id.coupon_photo);
         mTitleView = (TextView) view.findViewById(R.id.coupon_title);

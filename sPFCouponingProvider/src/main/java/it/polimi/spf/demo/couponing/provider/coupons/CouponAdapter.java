@@ -74,7 +74,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-        View v = layoutInflater.inflate(R.layout.coupon_list_entry_2, viewGroup, false);
+        View v = layoutInflater.inflate(R.layout.coupon_list_entry, viewGroup, false);
         return new ViewHolder(v);
     }
 
