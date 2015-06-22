@@ -2,17 +2,22 @@ package it.polimi.spf.demo.couponing.provider;
 
 import it.polimi.spf.lib.notification.SPFNotification;
 import it.polimi.spf.shared.model.SPFError;
+import lombok.Getter;
+import lombok.Setter;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,9 +41,14 @@ public class CouponDetailActivity extends ActionBarActivity {
 	private Coupon mCoupon;
 	
 	private SPFNotification mNotificationService;
-	private ImageView mPhotoView;
-	private TextView mTitleView, mTextView, mCategoryView;
-	
+
+
+	private CouponDetailFragment couponDetailFragment;
+
+	@Getter
+	@Setter
+	private Toolbar toolbar;
+
 	private LoaderManager.LoaderCallbacks<Coupon> mCouponLoaderCallbacks = new LoaderManager.LoaderCallbacks<Coupon>() {
 		
 		@Override
@@ -51,11 +61,9 @@ public class CouponDetailActivity extends ActionBarActivity {
 			Log.d(TAG, "Loaded coupon: " + coupon);
 			mCoupon = coupon;
 			Bitmap photo = BitmapFactory.decodeByteArray(coupon.getPhoto(), 0, coupon.getPhoto().length);
-			
-			mPhotoView.setImageBitmap(photo);
-			mTitleView.setText(coupon.getTitle());
-			mTextView.setText(coupon.getText());
-			mCategoryView.setText(coupon.getCategory());
+
+			couponDetailFragment.setPhotoAndCoupon(photo, mCoupon);
+
 		}
 		
 		@Override
@@ -93,20 +101,36 @@ public class CouponDetailActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_coupon_detail);
-		
+
+		setContentView(R.layout.activity_detail_2);
+
+		this.setupToolBar();
+
+
+		this.couponDetailFragment = CouponDetailFragment.newInstance();
+
+		this.getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container_creation_root, this.couponDetailFragment , "couponCreationFragment")
+				.commit();
+
+		this.getSupportFragmentManager().executePendingTransactions();
+
+
+
+
+
 		Bundle source = savedInstanceState != null ? savedInstanceState : getIntent().getExtras();
 		if(source == null || !source.containsKey(EXTRA_COUPON_ID)){
 			throw new IllegalStateException("Missing coupon ID");
 		}
 		
 		mCouponId = source.getLong(EXTRA_COUPON_ID);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		mPhotoView = (ImageView) findViewById(R.id.coupon_photo);
-		mTitleView = (TextView) findViewById(R.id.coupon_title);
-		mTextView = (TextView) findViewById(R.id.coupon_text);
-		mCategoryView = (TextView) findViewById(R.id.coupon_category);
+//		mPhotoView = (ImageView) findViewById(R.id.coupon_photo);
+//		mTitleView = (TextView) findViewById(R.id.coupon_title);
+//		mTextView = (TextView) findViewById(R.id.coupon_text);
+//		mCategoryView = (TextView) findViewById(R.id.coupon_category);
 		
 		getSupportLoaderManager().initLoader(COUPON_LOADER_ID, null, mCouponLoaderCallbacks).forceLoad();
 	}
@@ -186,5 +210,19 @@ public class CouponDetailActivity extends ActionBarActivity {
 	
 	private void toast(int resId){
 		Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * Method to setup the {@link android.support.v7.widget.Toolbar}
+	 * as supportActionBar in this {@link android.support.v7.app.ActionBarActivity}.
+	 */
+	private void setupToolBar() {
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		if (toolbar != null) {
+			toolbar.setTitle(getResources().getString(R.string.app_name));
+			toolbar.setTitleTextColor(Color.WHITE);
+			toolbar.inflateMenu(R.menu.menu_coupon_creation);
+			this.setSupportActionBar(toolbar);
+		}
 	}
 }

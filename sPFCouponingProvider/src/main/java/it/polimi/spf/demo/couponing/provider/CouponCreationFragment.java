@@ -1,16 +1,14 @@
 package it.polimi.spf.demo.couponing.provider;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -19,257 +17,112 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
+import com.soundcloud.android.crop.Crop;
 
-import it.polimi.spf.lib.notification.SPFNotification;
-import it.polimi.spf.shared.model.SPFAction;
-import it.polimi.spf.shared.model.SPFActionIntent;
-import it.polimi.spf.shared.model.SPFError;
-import it.polimi.spf.shared.model.SPFQuery;
-import it.polimi.spf.shared.model.SPFTrigger;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import lombok.Getter;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CouponCreationFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
  * Use the {@link CouponCreationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class CouponCreationFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
+    private static final String TAG = "CouponCreationActivity";
+    private static final int CODE_EDIT_PHOTO = 1;
 
-//
-//
-//
-//
-//
-//
-//    private static final String TAG = "CouponCreationActivity";
-//    private static final int CODE_EDIT_PHOTO = 1;
-//    private static final String PHOTO_WIDTH = "50dp";
-//    private static final String PHOTO_HEIGHT = "50dp";
-//    private static final String TRIGGER_INTENT_ACTION = "it.polimi.spf.demo.couponing.COUPON_TRIGGERED";
-//    private static final long SLEEP_PERIOD = 60 * 1000;
-//
-//    public static Intent newIntent(Context context) {
-//        Intent i = new Intent(context, CouponCreationActivity.class);
-//        return i;
-//    }
-//
-//    private ImageView mPhotoInput;
-//    private EditText mTitleInput, mTextInput;
-//    private Spinner mCategoryInput;
-//
-//    private Bitmap mPhoto;
-//    private SPFNotification mNotificationService;
-//
-//    private View.OnClickListener mPhotoClickListener = new View.OnClickListener() {
-//
-//        @Override
-//        public void onClick(View v) {
-//            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//            intent.setType("image/*");
-//            intent.putExtra("crop", "true");
-//            intent.putExtra("scale", true);
-//            intent.putExtra("outputX", PHOTO_WIDTH);
-//            intent.putExtra("outputY", PHOTO_HEIGHT);
-//            intent.putExtra("aspectX", 1);
-//            intent.putExtra("aspectY", 1);
-//            intent.putExtra("return-data", true);
-//            startActivityForResult(intent, CODE_EDIT_PHOTO);
-//        }
-//    };
-//
-//    private SPFNotification.Callback mNotificationServiceCallback = new SPFNotification.Callback() {
-//
-//        @Override
-//        public void onServiceReady(SPFNotification componentInstance) {
-//            mNotificationService = componentInstance;
-//        }
-//
-//        @Override
-//        public void onError(SPFError err) {
-//            mNotificationService = null;
-//            Log.e(TAG, "Error from notification service: " + err);
-//        }
-//
-//        @Override
-//        public void onDisconnect() {
-//            mNotificationService = null;
-//        }
-//    };
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_coupon_creation);
-////		getActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//        mPhotoInput = (ImageView) findViewById(R.id.coupon_photo);
-//        mTitleInput = (EditText) findViewById(R.id.coupon_title);
-//        mTextInput = (EditText) findViewById(R.id.coupon_text);
-//        mCategoryInput = (Spinner) findViewById(R.id.coupon_category);
-//
-//        String[] categories = ProviderApplication.get().getCouponDatabase().getCategories();
-//        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
-//        mCategoryInput.setAdapter(categoryAdapter);
-//
-//        mPhotoInput.setOnClickListener(mPhotoClickListener);
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        SPFNotification.load(this, mNotificationServiceCallback );
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        if(mNotificationService != null){
-//            mNotificationService.disconnect();
-//        }
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_coupon_creation, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                finish();
-//                return true;
-//            case R.id.action_coupon_save:
-//                onSave();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == CODE_EDIT_PHOTO) {
-//            if (resultCode != Activity.RESULT_OK) {
-//                return;
-//            }
-//
-//            if (data != null && data.getExtras() != null) {
-//                mPhoto = data.getExtras().getParcelable("data");
-//                mPhotoInput.setImageBitmap(mPhoto);
-//                mPhotoInput.invalidate();
-//            }
-//        } else {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
-//
-//    private void onSave() {
-//        try {
-//            checkInput();
-//        } catch (InputException e) {
-//            toast(e.getMessageResId());
-//            return;
-//        }
-//
-//        Coupon coupon = new Coupon();
-//        coupon.setTitle(mTitleInput.getText().toString());
-//        coupon.setText(mTextInput.getText().toString());
-//        coupon.setCategory((String) mCategoryInput.getSelectedItem());
-//
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        mPhoto.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-//        coupon.setPhoto(baos.toByteArray());
-//
-//        if(mNotificationService == null){
-//            toast(R.string.error_notification_service_unavailable);
-//            return;
-//        }
-//
-//        SPFQuery query = new SPFQuery.Builder()
-//                .setTag(coupon.getCategory())
-//                .setAppIdentifier("it.polimi.spf.demo.couponing.client")
-//                .build();
-//
-//        SPFAction action = new SPFActionIntent(TRIGGER_INTENT_ACTION);
-//        SPFTrigger trigger;
-//        try {
-//            trigger = new SPFTrigger("Coupon " + coupon.getTitle() + " trigger", query, action, SLEEP_PERIOD);
-//        } catch (SPFTrigger.IllegalTriggerException e) {
-//            toast(R.string.error_trigger_invalid);
-//            return;
-//        }
-//
-//        if(!mNotificationService.saveTrigger(trigger)){
-//            toast(R.string.error_trigger_not_saved);
-//            return;
-//        }
-//
-//        coupon.setTriggerId(trigger.getId());
-//        ProviderApplication.get().getCouponDatabase().saveCoupon(coupon);
-//        finish();
-//    }
-//
-//    private void toast(int messageResId) {
-//        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
-//    }
-//
-//    private void checkInput() throws InputException {
-//        if(mPhoto == null){
-//            throw new InputException(R.string.error_coupon_photo_empty);
-//        }
-//
-//        if (mTitleInput.getText().length() == 0) {
-//            throw new InputException(R.string.error_coupon_title_empty);
-//        }
-//
-//        if (mTextInput.getText().length() == 0) {
-//            throw new InputException(R.string.error_coupon_text_empty);
-//        }
-//
-//        if (mCategoryInput.getSelectedItem() == null) {
-//            throw new InputException(R.string.error_coupon_category_empty);
-//        }
-//    }
-//
-//    private class InputException extends Exception {
-//
-//        private static final long serialVersionUID = -3918089388542981197L;
-//        private int mMessageResId;
-//
-//        public InputException(int messageResId) {
-//            super();
-//            mMessageResId = messageResId;
-//        }
-//
-//        public int getMessageResId() {
-//            return mMessageResId;
-//        }
-//    }
+    @Getter private ImageView mPhotoInput;
+    @Getter private EditText mTitleInput, mTextInput;
+    @Getter private Spinner mCategoryInput;
+
+    @Getter private Bitmap mPhoto;
+
+    private View.OnClickListener mPhotoClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            Crop.pickImage(getActivity());
+        }
+    };
 
 
+    /**
+     * Method to start the activity to crop an image.
+     * @param source
+     */
+    public void beginCrop(Uri source) {
+        Uri destination = Uri.fromFile(new File(this.getActivity().getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().start(this.getActivity());
+    }
 
+    /**
+     * Method to set an show a cropped imaged.
+     * @param resultCode
+     * @param result
+     */
+    public void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+            Uri uri = Crop.getOutput(result);
+            mPhotoInput.setImageURI(uri);
 
+            InputStream inputStream = null;
+            try {
+                inputStream = new FileInputStream(uri.getPath());
+                Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
+                myBitmap = Bitmap.createScaledBitmap(myBitmap,130,130,false);
 
+//                mContainer.setFieldValue(ProfileField.PHOTO, myBitmap);
+//                showPicture(myBitmap);
+                mPhoto = myBitmap;
+                this.mPhotoInput.setImageBitmap(myBitmap);
+                this.mPhotoInput.invalidate();
 
+            } catch (FileNotFoundException e) {
+                Log.e(TAG, "handleCrop FileInputStream-file not found from uri.getpath", e);
+            } finally {
+                if(inputStream!=null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        Log.e(TAG, "handleCrop closing input stream error", e);
+                    }
+                }
+            }
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this.getActivity(), Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CODE_EDIT_PHOTO) {
+            if (resultCode != Activity.RESULT_OK) {
+                return;
+            }
 
+            if (data != null && data.getExtras() != null) {
+                mPhoto = data.getExtras().getParcelable("data");
+                mPhotoInput.setImageBitmap(mPhoto);
+                mPhotoInput.invalidate();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      * @return A new instance of fragment CouponCreateFragment.
      */
-    public static CouponCreationFragment newInstance(String param1, String param2) {
+    public static CouponCreationFragment newInstance() {
         CouponCreationFragment fragment = new CouponCreationFragment();
         return fragment;
     }
@@ -286,47 +139,64 @@ public class CouponCreationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coupon_create, container, false);
+        View view = inflater.inflate(R.layout.activity_coupon_creation, container, false);
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mPhotoInput = (ImageView) this.getActivity().findViewById(R.id.coupon_photo);
+        mTitleInput = (EditText) this.getActivity().findViewById(R.id.coupon_title);
+        mTextInput = (EditText) this.getActivity().findViewById(R.id.coupon_text);
+        mCategoryInput = (Spinner) this.getActivity().findViewById(R.id.coupon_category);
+
+        String[] categories = ProviderApplication.get().getCouponDatabase().getCategories();
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1, categories);
+        mCategoryInput.setAdapter(categoryAdapter);
+
+        mPhotoInput.setOnClickListener(mPhotoClickListener);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+
+    public void checkInput() throws InputException {
+		if(mPhoto == null){
+			throw new InputException(R.string.error_coupon_photo_empty);
+		}
+
+        if (mTitleInput.getText().length() == 0) {
+            throw new InputException(R.string.error_coupon_title_empty);
+        }
+
+        if (mTextInput.getText().length() == 0) {
+            throw new InputException(R.string.error_coupon_text_empty);
+        }
+
+        if (mCategoryInput.getSelectedItem() == null) {
+            throw new InputException(R.string.error_coupon_category_empty);
+        }
     }
 
+
+    public class InputException extends Exception {
+
+        private static final long serialVersionUID = -3918089388542981197L;
+        private int mMessageResId;
+
+        public InputException(int messageResId) {
+            super();
+            mMessageResId = messageResId;
+        }
+
+        public int getMessageResId() {
+            return mMessageResId;
+        }
+    }
 }

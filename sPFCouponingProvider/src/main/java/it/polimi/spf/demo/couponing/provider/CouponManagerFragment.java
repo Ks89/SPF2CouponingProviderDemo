@@ -111,8 +111,6 @@ public class CouponManagerFragment extends Fragment {
 		if (item.getItemId() == R.id.action_coupon_add) {
 			Intent i = CouponCreationActivity.newIntent(getActivity());
 			startActivity(i);
-
-			//TODO START HERE THE CREATIONFRAGMENT
 			return true;
 		}
 
