@@ -42,6 +42,10 @@ public class CouponCreationActivity extends AppCompatActivity {
 	private CouponCreationFragment couponCreationFragment;
 	private SPFNotification mNotificationService;
 
+	public interface CouponListFragmentCallback {
+		void requestNotifyDatasetChanged();
+	}
+
 	public static Intent newIntent(Context context) {
 		Intent i = new Intent(context, CouponCreationActivity.class);
 		return i;
@@ -190,6 +194,9 @@ public class CouponCreationActivity extends AppCompatActivity {
         coupon.setTriggerId(trigger.getId());
         ProviderApplication.get().getCouponDatabase().saveCoupon(coupon);
 
+
+//		((CouponListFragmentCallback) this).requestNotifyDatasetChanged();
+
 		finish();
 	}
 
@@ -201,7 +208,7 @@ public class CouponCreationActivity extends AppCompatActivity {
 
 	/**
 	 * Method to setup the {@link android.support.v7.widget.Toolbar}
-	 * as supportActionBar in this {@link android.support.v7.app.AppCompatActivity}.
+	 * as supportActionBar in this {@link android.support.v7.app.ActionBarActivity}.
 	 */
 	private void setupToolBar() {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
