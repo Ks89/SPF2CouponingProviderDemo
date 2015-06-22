@@ -201,7 +201,7 @@ public class CouponCreationActivity extends AppCompatActivity {
 
 	/**
 	 * Method to setup the {@link android.support.v7.widget.Toolbar}
-	 * as supportActionBar in this {@link android.support.v7.app.ActionBarActivity}.
+	 * as supportActionBar in this {@link android.support.v7.app.AppCompatActivity}.
 	 */
 	private void setupToolBar() {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
