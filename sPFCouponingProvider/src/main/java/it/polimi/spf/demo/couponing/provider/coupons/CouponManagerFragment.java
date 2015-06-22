@@ -161,7 +161,6 @@ public class CouponManagerFragment extends Fragment implements
 		Log.d("onActivityResult","size: " + CouponList.getInstance().getCouponList().size());
 		if(requestCode==123) {
 			getLoaderManager().initLoader(LOADER_COUPON_ID, null, mLoaderCallbacks).forceLoad();
-			this.mAdapter.notifyDataSetChanged();
 			Log.d("onActivityResult","size: " + CouponList.getInstance().getCouponList().size());
 
 		}
