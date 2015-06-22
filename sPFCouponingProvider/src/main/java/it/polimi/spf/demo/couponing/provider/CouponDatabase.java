@@ -37,7 +37,7 @@ public class CouponDatabase extends SQLiteOpenHelper {
 	//@formatter:on
 
 	/**
-	 * Constructor for {@link ChatStorage}
+	 * Constructor for {@link CouponDatabase}
 	 * 
 	 * @param ctx
 	 *            - the Context in which the database should be created

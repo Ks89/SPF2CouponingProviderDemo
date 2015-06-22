@@ -84,7 +84,6 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
 
         Coupon coupon = CouponList.getInstance().getCouponList().get(position);
 
-//        WiFiP2pService service = ServiceList.getInstance().getElementByPosition(position);
         if (coupon != null) {
             viewHolder.photo.setImageBitmap(BitmapFactory.decodeByteArray(coupon.getPhoto(), 0, coupon.getPhoto().length));
             viewHolder.title.setText(coupon.getTitle());
