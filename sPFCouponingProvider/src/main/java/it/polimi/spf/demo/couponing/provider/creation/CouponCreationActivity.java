@@ -98,27 +98,29 @@ public class CouponCreationActivity extends AppCompatActivity {
 
 		this.getSupportFragmentManager().executePendingTransactions();
 
-//		if(mNotificationService == null) {
-//			SPFNotification.load(this, mNotificationServiceCallback);
-//		}
+		if(mNotificationService == null) {
+			//FIXME BUG ID = 6 : sometimes here there is an exeception's message. .... has leaked ...
+			//only when i finished the coupon's creation
+			SPFNotification.load(this, mNotificationServiceCallback);
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-		if(mNotificationService == null) {
-			SPFNotification.load(this, mNotificationServiceCallback);
-		}
+//		if(mNotificationService == null) {
+//			SPFNotification.load(this, mNotificationServiceCallback);
+//		}
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
 
-		if(mNotificationService != null){
-			mNotificationService.disconnect();
-		}
+//		if(mNotificationService != null){
+//			mNotificationService.disconnect();
+//		}
 	}
 
 	@Override

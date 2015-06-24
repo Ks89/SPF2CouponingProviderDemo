@@ -15,6 +15,8 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
+import java.util.List;
+
 public class TriggerIntentReceiver extends BroadcastReceiver {
 
 	protected static final String TAG = "TriggerIntentReceiver";
@@ -31,9 +33,17 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 			HandlerData data = (HandlerData) msg.obj;
 
 			Log.d(TAG, "handleMessage: " + msg.toString());
+			Log.d(TAG, "handleMessage data id: " + data.extras.getLong(SPFActionIntent.ARG_LONG_TRIGGER_ID));
+
+			List<Coupon> list = ProviderApplication.get().getCouponDatabase().getAllCoupons();
+
+			for(Coupon coupon : list) {
+				Log.d(TAG, "ELEMENT LISTA " + coupon.toString());
+			}
 
 			switch (msg.what) {
 				case MESSAGE_SEARCH:
+					Log.d(TAG, "MESSAGE_SEARCH");
 					SPFSearch search = data.spf.getComponent(SPF.SEARCH);
 					String identifier = getTargetIdentifier(data.extras);
 					SPFPerson target = search.lookup(identifier);
@@ -46,6 +56,7 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 					mHandler.obtainMessage(MESSAGE_EXECUTE, data).sendToTarget();
 					return true;
 				case MESSAGE_EXECUTE:
+					Log.d(TAG, "MESSAGE_EXECUTE");
 					CouponDeliveryService svc = data.person.getServiceInterface(CouponDeliveryService.class, data.spf);
 
 					CouponDatabase db = ProviderApplication.get().getCouponDatabase();
@@ -108,6 +119,7 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 
 				if (target == null) {
 					// Try postponing the request
+					Log.d(TAG,"Request postponed because target is null");
 					Message message = mHandler.obtainMessage(MESSAGE_SEARCH, data);
 					mHandler.sendMessageDelayed(message, 2000);
 				} else {
