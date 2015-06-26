@@ -34,3 +34,4 @@ proguard/
 gradle
 sPFCouponingProvider/sPFCouponingProvider.iml
 SPFCouponingProvider.iml
+*.iml
