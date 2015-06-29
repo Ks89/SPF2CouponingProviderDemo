@@ -1,7 +1,7 @@
 package it.polimi.spf.demo.couponing.provider.coupons;
 
 /**
- * Created by Stefano Cappa on 22/06/15.
+ * Created by Stefano Cappa on 27/06/15.
  */
 
 import android.graphics.BitmapFactory;
