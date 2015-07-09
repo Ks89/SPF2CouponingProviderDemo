@@ -26,7 +26,7 @@ import it.polimi.spf.lib.SPFPermissionManager;
 import it.polimi.spf.shared.model.Permission;
 import android.app.Application;
 
-public class ProviderApplication extends Application{
+public class ProviderApplication extends Application {
 
 	private static ProviderApplication instance;
 	private CouponDatabase mDatabase;
