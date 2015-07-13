@@ -46,7 +46,8 @@ public class ProviderApplication extends Application {
 				Permission.WRITE_LOCAL_PROFILE,
 				Permission.EXECUTE_REMOTE_SERVICES,
 				Permission.NOTIFICATION_SERVICES,
-				Permission.SEARCH_SERVICE);
+				Permission.SEARCH_SERVICE,
+				Permission.BECOME_GROUPOWNER);
 	}
 	
 	public CouponDatabase getCouponDatabase(){

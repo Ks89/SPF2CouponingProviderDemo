@@ -116,7 +116,7 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, final Intent intent) {
-		Log.d(TAG, "Intent received");
+		Log.d(TAG, "Intent received: " + intent);
 		SPF.connect(ProviderApplication.get(), new SPF.ConnectionListener() {
 
 			@Override
@@ -132,6 +132,7 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 			@Override
 			public void onConnected(SPF instance) {
 				SPFSearch search = instance.getComponent(SPF.SEARCH);
+				search.setGoIntent(3);
 				HandlerData data = new HandlerData();
 				data.spf = instance;
 				data.extras = intent.getExtras();

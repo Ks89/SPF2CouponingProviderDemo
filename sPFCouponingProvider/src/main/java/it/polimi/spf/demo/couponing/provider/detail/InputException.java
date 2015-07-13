@@ -21,7 +21,7 @@
 package it.polimi.spf.demo.couponing.provider.detail;
 
 /**
- * Created by Stefano Capwpa on 22/06/15.
+ * Created by Stefano Cappa on 22/06/15.
  */
 
 public class InputException extends Exception {
