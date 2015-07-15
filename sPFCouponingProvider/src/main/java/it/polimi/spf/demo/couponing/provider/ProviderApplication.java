@@ -48,6 +48,10 @@ public class ProviderApplication extends Application {
 				Permission.NOTIFICATION_SERVICES,
 				Permission.SEARCH_SERVICE,
 				Permission.BECOME_GROUPOWNER);
+
+		//attention, Permission.BECOME_GROUPOWNER it's only an idea to set a permission and based on this,
+		//in SPF, set goIntent=15 if BECOME_GROUPOWNER is available in the db.
+		//this is only ad idea, because at the moment there isn't logic to do this.
 	}
 	
 	public CouponDatabase getCouponDatabase(){

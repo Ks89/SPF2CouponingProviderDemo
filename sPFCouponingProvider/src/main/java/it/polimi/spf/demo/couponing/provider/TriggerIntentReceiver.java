@@ -56,7 +56,7 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 			Log.d(TAG, "handleMessage: " + msg.toString());
 			Log.d(TAG, "handleMessage data id: " + data.extras.getLong(SPFActionIntent.ARG_LONG_TRIGGER_ID));
 
-			data.spf.setGoIntentValue(3, getTargetIdentifier(data.extras));
+//			data.spf.setGoIntentValue(15, getTargetIdentifier(data.extras));
 
 			List<Coupon> list = ProviderApplication.get().getCouponDatabase().getAllCoupons();
 
@@ -120,7 +120,6 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, final Intent intent) {
 		Log.d(TAG, "Intent received: " + intent);
 
-
 		SPF.connect(ProviderApplication.get(), new SPF.ConnectionListener() {
 
 			@Override
@@ -136,7 +135,6 @@ public class TriggerIntentReceiver extends BroadcastReceiver {
 			@Override
 			public void onConnected(SPF instance) {
 				SPFSearch search = instance.getComponent(SPF.SEARCH);
-//				search.setGoIntent(3);
 				HandlerData data = new HandlerData();
 				data.spf = instance;
 				data.extras = intent.getExtras();
