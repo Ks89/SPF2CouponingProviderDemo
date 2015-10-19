@@ -140,7 +140,8 @@ public class CategoryFragment extends Fragment {
         		categories);
         mList.setAdapter(adapter);
 
-        //FIXME anche qui nullpointerexception, penso su mContainer
+        //FIXME nullpointerexception somewhere, probably on mContainer,
+        //FIXME please fix this if you found this bug
         String[] interests = mContainer.getFieldValue(ProfileField.INTERESTS);
         if(interests == null){
             interests = new String[0];
@@ -156,7 +157,6 @@ public class CategoryFragment extends Fragment {
         mList.setOnItemClickListener(mCategoryListener);
     }
 
-    //FIXME ma cosa vuol dire questa cosa????
     public void onSave() {
         if (!mContainer.isModified()) {
             return;
