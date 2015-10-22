@@ -29,6 +29,7 @@ proguard/
 *.log
 
 
+.DS_Store
 
 .idea
 sPFCouponingProvider/sPFCouponingProvider.iml
