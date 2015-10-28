@@ -40,12 +40,6 @@ because Gradle caches dependencies automatically into .gradle/caches/modules-2/f
 - *10/20/2015* - **SPF2CouponingProviderDemo** Beta 1 - [Download](https://github.com/Ks89/SPF2CouponingProviderDemo/releases/tag/v.beta1)
 
 
-## Changelog
-
-- **2.0.0**
-First official release.
-
-
 ## Dependencies
 
 As you can see, to be able to compile a SPF2's app, you should simply 
@@ -58,7 +52,12 @@ compile 'it.polimi.spf:spfshared:2.0.0.1@aar'
 }
 ```
 
-## Known issues
+## Changelog
+
+Changelog is available [HERE](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/CHANGELOG.md)
+
+
+## Known issues to fix
 
 - [ ] Replace materialtabstrip library with the official version included into Design support library by Google, either for CouponingProvider or CouponingClient.
 - [ ] Replace multiselection library in CouponingProvider and CouponingClient with an official version.
@@ -68,17 +67,17 @@ If you want to do something, create a Pull Request! XD
 
 ## Images
 
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/button_iconics.png)
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/drawer.png)
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/drawer_proximity.png)
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/notifications.png) <br />
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet1.png) <br />
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet2.png) <br />
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet3.png) <br />
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/about_fragment.png) 
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/button_iconics.png" width="250">
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/drawer.png" width="250">
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/drawer_proximity.png" width="250">
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/notifications.png" width="250"> <br />
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet1.png" width="250"> <br />
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet2.png" width="250"> <br />
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet3.png" width="250"> <br />
+<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/about_fragment.png" width="250"> 
 
 
-# License
+## License
 Copyright 2014 Jacopo Aliprandi, Dario Archetti<br>
 Copyright 2015 Stefano Cappa
 
