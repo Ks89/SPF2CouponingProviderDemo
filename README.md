@@ -7,7 +7,7 @@
 
 # SPF2CouponingProviderDemo
 
-![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingClientDemo/master/repo_images/SPF2couponingprovider_header.png)
+![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/SPF2couponingprovider_header.png)
 
 <br>
 
@@ -67,14 +67,7 @@ If you want to do something, create a Pull Request! XD
 
 ## Images
 
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/button_iconics.png" width="250">
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/drawer.png" width="250">
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/drawer_proximity.png" width="250">
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/notifications.png" width="250"> <br />
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet1.png" width="250"> <br />
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet2.png" width="250"> <br />
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/tablet3.png" width="250"> <br />
-<img align="center" src="https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/about_fragment.png" width="250"> 
+//TODO add here
 
 
 ## License
