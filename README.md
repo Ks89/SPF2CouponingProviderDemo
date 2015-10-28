@@ -29,8 +29,8 @@ because Gradle caches dependencies automatically into .gradle/caches/modules-2/f
 
 ## Releases
 
-- *10/27/2015* - **SPF2CouponingProviderDemo** 2.0.0 - [Download](https://github.com/Ks89/SPF2CouponingProviderDemo/releases/tag/v.2.0.0)
-- *10/20/2015* - **SPF2CouponingProviderDemo** Beta 1 - [Download](https://github.com/Ks89/SPF2CouponingProviderDemo/releases/tag/v.beta1)
+- *10/27/2015* - **SPF2CouponingProviderDemo** 2.0.0 - [Download](https://github.com/deib-polimi/SPF2CouponingProviderDemo/releases/tag/v.2.0.0)
+- *10/20/2015* - **SPF2CouponingProviderDemo** Beta 1 - [Download](https://github.com/deib-polimi/SPF2CouponingProviderDemo/releases/tag/v.beta1)
 
 
 ## Dependencies
