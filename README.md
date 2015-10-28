@@ -1,10 +1,3 @@
-[![License LGPL 3](https://img.shields.io/badge/license-LGPLv3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0.txt)
-![](https://reposs.herokuapp.com/?path=Ks89/SPF2)
-[![Build Status](https://travis-ci.org/Ks89/SPF2.svg?branch=master)](https://travis-ci.org/Ks89/SPF2)
-
-[![Issue Stats](http://issuestats.com/github/Ks89/SPF2/badge/pr?style=flat)](http://issuestats.com/github/Ks89/SPF2)
-[![Issue Stats](http://issuestats.com/github/Ks89/SPF2/badge/issue?style=flat)](http://issuestats.com/github/Ks89/SPF2)
-
 # SPF2CouponingProviderDemo
 
 ![alt tag](https://raw.githubusercontent.com/deib-polimi/SPF2CouponingProviderDemo/master/repo_images/SPF2couponingprovider_header.png)
